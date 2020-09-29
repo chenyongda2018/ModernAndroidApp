@@ -19,14 +19,10 @@ class MainActivity : AppCompatActivity() {
         var repo = Repo("ModernAndroidApp","chenyongda",true,
             100)
 
-        updateUI(repo)
-
-        Handler().postDelayed({repo.repoName = "OlderAndroid"},2000)
-
-    }
-
-    private fun updateUI(repo: Repo) {
         binding.repo = repo
         binding.executePendingBindings()
+
+
     }
+
 }
