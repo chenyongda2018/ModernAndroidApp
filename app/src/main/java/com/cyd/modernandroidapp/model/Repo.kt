@@ -15,7 +15,7 @@ class Repo(
 ) :BaseObservable(){
 
     @get:Bindable
-    var repoName : String = ""
+    var repoName : String = repoName
     set(value) {
         field = value;
         notifyPropertyChanged(BR.repoName)

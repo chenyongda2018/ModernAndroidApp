@@ -9,13 +9,15 @@ import com.cyd.modernandroidapp.model.Repo
 /**
  * Created by cyd on 2020/9/30.
  */
-class RepoRvAdapter(private var repoList : ArrayList<Repo>,private var listener: OnItemClickListener?)
-    : RecyclerView.Adapter<RepoRvAdapter.ViewHolder>() {
+class RepoRvAdapter(
+    private var repoList: ArrayList<Repo>,
+    private var listener: OnItemClickListener?
+) : RecyclerView.Adapter<RepoRvAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater =LayoutInflater.from(parent.context)
-        val binding = RvItemRepoBinding.inflate(layoutInflater,parent,false)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = RvItemRepoBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
     }
 
@@ -24,23 +26,24 @@ class RepoRvAdapter(private var repoList : ArrayList<Repo>,private var listener:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(repoList.get(position),listener)
+        holder.bind(repoList[position], listener)
     }
 
-    class ViewHolder(private var binding : RvItemRepoBinding) :
+    class ViewHolder(private var binding: RvItemRepoBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(repo : Repo , listener: OnItemClickListener?) {
+        fun bind(repo: Repo, listener: OnItemClickListener?) {
             binding.repo = repo
-            if(listener != null) {
-                binding.root.setOnClickListener { _ -> listener.onItemClick(layoutPosition) }
+            if (listener != null) {
+                binding.root.setOnClickListener { listener.onItemClick(layoutPosition) }
             }
             binding.executePendingBindings()
         }
 
     }
+
     interface OnItemClickListener {
-        fun onItemClick(position : Int)
+        fun onItemClick(position: Int)
 
     }
 

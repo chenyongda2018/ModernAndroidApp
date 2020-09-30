@@ -1,28 +1,33 @@
 package com.cyd.modernandroidapp.viewmodel
 
+import android.app.Application
 import androidx.databinding.ObservableField
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.cyd.modernandroidapp.model.GitRepoRepository
+import com.cyd.modernandroidapp.model.OnLoadRepoListener
 import com.cyd.modernandroidapp.model.Repo
-import com.cyd.modernandroidapp.model.RepoModel
 import java.util.*
 
 /**
  * Created by cyd on 2020/9/30.
  */
-class RepoViewModel : ViewModel(){
-    var model : RepoModel = RepoModel()
+class MainViewModel : AndroidViewModel {
 
-    var isLoading  = ObservableField<Boolean>(true)
+    constructor(application: Application) : super(application)
 
-    var data  = ObservableField<String>("")
+    var dataSource = GitRepoRepository(getApplication())
+
+    var isLoading = ObservableField<Boolean>(true)
+
+    var data = ObservableField<String>("")
 
     var repoList = MutableLiveData<ArrayList<Repo>>()
 
 
     fun refreshData() {
         isLoading.set(true)
-        model.loadRepo(object : RepoModel.OnLoadRepoListener<Repo> {
+        dataSource.loadData(object : OnLoadRepoListener<Repo> {
             override fun onLoadRepoListSuccess(data: ArrayList<Repo>) {
                 repoList.postValue(data)
                 isLoading.set(false)

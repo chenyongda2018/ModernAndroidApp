@@ -9,7 +9,7 @@
 
         <variable
             name="repoViewModel"
-            type="com.cyd.modernandroidapp.viewmodel.RepoViewModel" />
+            type="com.cyd.modernandroidapp.viewmodel.MainViewModel" />
 
     </data>
 

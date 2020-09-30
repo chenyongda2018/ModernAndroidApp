@@ -2,20 +2,17 @@ package com.cyd.modernandroidapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.cyd.modernandroidapp.databinding.ActivityMainBinding
-import com.cyd.modernandroidapp.model.Repo
-import com.cyd.modernandroidapp.viewmodel.RepoViewModel
+import com.cyd.modernandroidapp.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), RepoRvAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private var adapter = RepoRvAdapter(ArrayList(), this)
+    private var adapter = RepoRvAdapter(arrayListOf(), this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,13 +21,14 @@ class MainActivity : AppCompatActivity(), RepoRvAdapter.OnItemClickListener {
             this, R.layout.activity_main
         )
 
-        var repoViewModel = ViewModelProviders.of(this).get(RepoViewModel::class.java)
+        var repoViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
         binding.repoViewModel = repoViewModel;
+        binding.executePendingBindings()
 
         binding.repoRv.layoutManager = LinearLayoutManager(this)
         binding.repoRv.adapter = adapter
-        repoViewModel.repoList.observe(this, Observer<ArrayList<Repo>>{
+        repoViewModel.repoList.observe(this, Observer {
             it?.let {
                 adapter.updateData(it)
             }
@@ -41,7 +39,7 @@ class MainActivity : AppCompatActivity(), RepoRvAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        TODO("Not yet implemented")
+
     }
 
 }
