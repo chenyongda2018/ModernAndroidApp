@@ -10,6 +10,7 @@ class NetManager(private var context : Context) {
     val isConnect : Boolean?
     get() {
         val connManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return connManager.isActiveNetworkMetered
+        val connInfo = connManager.activeNetworkInfo;
+        return connInfo != null && connInfo.isConnected
     }
 }
