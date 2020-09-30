@@ -4,86 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
-            name="repo"
-            type="com.cyd.modernandroidapp.model.Repo" />
+            name="repoViewModel"
+            type="com.cyd.modernandroidapp.viewmodel.RepoViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/repo_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            android:text="@{repo.repoName}"
-            tools:text="ModernAndroidApp" />
-
-        <TextView
-            android:id="@+id/repo_has_issues"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:textStyle="bold"
-            android:text="@string/has_issues"
-            android:visibility="@{repo.repoHasIssue ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@+id/repo_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/repo_name"
-            app:layout_constraintTop_toTopOf="@+id/repo_name"
-            app:layout_constraintVertical_bias="1.0"
-            />
-
-        <TextView
-            android:id="@+id/repo_owner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/repo_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repo_name"
-            app:layout_constraintVertical_bias="0.0"
-            android:text="@{repo.repoOwner}"
-            tools:text="chenyongda" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/repo_star_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="@{repoViewModel.isLoading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repo_owner"
-            app:layout_constraintVertical_bias="0.0"
-            android:text="@{repo.repoStarCount.toString()}"
-            tools:text="0 stars" />
+            app:layout_constraintEnd_toEndOf="@+id/repo_rv"
+            app:layout_constraintStart_toStartOf="@+id/repo_rv"
+            app:layout_constraintTop_toTopOf="@+id/repo_rv" />
+
+<!--        <Button-->
+<!--            android:id="@+id/refresh_data_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="GET"-->
+<!--            android:onClick="@{() -> repoViewModel.refreshData()}"-->
+<!--            android:visibility="@{repoViewModel.isLoading ? View.VISIBLE : View.GONE}"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/repo_rv"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/progress_bar"-->
+<!--            tools:text="GET" />-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>
