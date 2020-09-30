@@ -19,7 +19,9 @@ class GitRepoRepository(context: Context) {
 
         netManager.isConnect?.let {
             if(it) {
-                return remoteDataSource.loadRepo()
+                return remoteDataSource.loadRepo().flatMap {
+                    return@flatMap localDataSource.saveData(it).toSingleDefault(it).toObservable()
+                }
             }
         }
         return localDataSource.loadData()

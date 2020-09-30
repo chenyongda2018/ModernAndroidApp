@@ -1,7 +1,9 @@
 package com.cyd.modernandroidapp.model
 
 import android.os.Handler
+import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
 
@@ -20,6 +22,8 @@ class RepoLocalDataSource{
         return Observable.just(repoList).delay(2, TimeUnit.SECONDS)
     }
 
-    fun saveData(arrayList: ArrayList<Repo>) {}
+    fun saveData(arrayList: ArrayList<Repo>): Completable {
+        return Single.just(1).delay(1,TimeUnit.SECONDS).toCompletable()
+    }
 
 }
