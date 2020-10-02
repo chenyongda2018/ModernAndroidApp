@@ -1,4 +1,4 @@
-package com.cyd.modernandroidapp
+package com.cyd.modernandroidapp.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

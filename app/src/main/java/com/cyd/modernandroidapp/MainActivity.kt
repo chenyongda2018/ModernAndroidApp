@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cyd.modernandroidapp.databinding.ActivityMainBinding
 import com.cyd.modernandroidapp.inject.Inject
+import com.cyd.modernandroidapp.ui.RepoRvAdapter
 import com.cyd.modernandroidapp.viewmodel.MainViewModel
 import com.cyd.modernandroidapp.viewmodel.MainViewModelFactory
 
@@ -15,7 +16,8 @@ class MainActivity : AppCompatActivity(), RepoRvAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModelFactory: MainViewModelFactory
-    private var adapter = RepoRvAdapter(arrayListOf(), this)
+    private var adapter =
+        RepoRvAdapter(arrayListOf(), this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
