@@ -1,6 +1,5 @@
 package com.cyd.modernandroidapp.model
 
-import android.os.Handler
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single

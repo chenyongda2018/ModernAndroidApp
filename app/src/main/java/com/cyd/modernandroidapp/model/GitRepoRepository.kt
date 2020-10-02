@@ -7,20 +7,21 @@ import io.reactivex.Observable
 /**
  * Created by cyd on 2020/9/30.
  */
-class GitRepoRepository(context: Context) {
+class GitRepoRepository(private val netManager: NetManager) {
+
     val localDataSource  = RepoLocalDataSource()
 
     val remoteDataSource = RepoRemoteDataSource()
 
-    val netManager = NetManager(context)
+
 
 
     fun loadData(): Observable<ArrayList<Repo>> {
 
         netManager.isConnect?.let {
             if(it) {
-                return remoteDataSource.loadRepo().flatMap {
-                    return@flatMap localDataSource.saveData(it).toSingleDefault(it).toObservable()
+                return remoteDataSource.loadRepo().flatMap { result ->
+                    return@flatMap localDataSource.saveData(result).toSingleDefault(result).toObservable()
                 }
             }
         }

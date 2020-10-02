@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.cyd.modernandroidapp.model.GitRepoRepository
 import com.cyd.modernandroidapp.model.Repo
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,11 +16,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by cyd on 2020/9/30.
  */
-class MainViewModel : AndroidViewModel {
-
-    constructor(application: Application) : super(application)
-
-    var dataSource = GitRepoRepository(getApplication())
+class MainViewModel(private val dataSource : GitRepoRepository) : ViewModel() {
 
     var isLoading = ObservableField<Boolean>(true)
 
